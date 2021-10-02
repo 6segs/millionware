@@ -1083,17 +1083,17 @@ Nightmode =
 )
 
 local zuhnmode = Instance.new("ColorCorrectionEffect", workspace.CurrentCamera)
-ZuhnMode =
+Zuhnmode =
     aC:CreateToggle(
-        "Zuhn Mode",
-        function(K)
-            if K == true then
-                zuhnmode.Saturation = 1.2
-            elseif K == false then
-                zuhnmode.Saturation = 0
-            end
+    "Zuhn Mode",
+    function(K)
+        if K == true then
+            zuhnmode.Saturation = 1.2
+        elseif K == false then
+            zuhnmode.Saturation = 0
         end
-    )
+    end
+)
 
 
 Fog =
@@ -1366,40 +1366,21 @@ unlockInv =
     end
 )
 
-enabledViewmodel =
-    aC:CreateToggle(
-    "Enabled Viewmodel",
-    function(K)
-        ViewmodelEnabled = K
-    end
-)
+enabledViewmodel = aC:CreateToggle("Enabled Viewmodel", function(K)
+    ViewmodelEnabled = K
+end)
 
-chamsTransparency =
-    aC:CreateSlider(
-    "X",
-    360,
-    function(W)
-        ViewmodelX = W
-        end
-)
+xViewmodel = aC:CreateSlider("X", 360, function(W)
+    ViewmodelX = W
+end)
 
-chamsTransparency =
-    aC:CreateSlider(
-    "Y",
-    360,
-    function(W)
-        ViewmodelY = W
-        end
-)
+yViewmodel = aC:CreateSlider("Y", 360, function(W)
+    ViewmodelY = W
+end)
 
-chamsTransparency =
-    aC:CreateSlider(
-    "Z",
-    360,
-    function(W)
-        ViewmodelZ = W
-        end
-)
+zViewmodel = aC:CreateSlider("Z", 360, function(W)
+    ViewmodelZ = W
+end)
 
 configName = aF:Textbox("Config name")
 Config =
@@ -1549,6 +1530,20 @@ aE:CreateToggle(
 		Clips.Name = "Clips"; Clips.Parent = workspace.Map
         end
     )
+end)
+
+aE:CreateButton("Fix Viewmodels", function()
+    game.ReplicatedStorage.Viewmodels["v_USP"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Tec9"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Smoke Grenade"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Scout"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_SawedOff"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_SCAR-20"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Negev"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Incendiary Grenade"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Flashbang"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_Decoy Grenade"].HumanoidRootPart.Transparency = 1
+    game.ReplicatedStorage.Viewmodels["v_C4Halloween"].HumanoidRootPart.Transparency = 1
 end)
 
 Daggers =
@@ -1948,6 +1943,27 @@ steve =
     end
 )
 
+resetViewmodels = aG:CreateButton("Reset Viewmodels", function()
+    game.ReplicatedStorage.Viewmodels:Destroy()
+    wait()
+    local _vmdlsFolder = Instance.new("Folder", game.ReplicatedStorage)
+    _vmdlsFolder.Name = "Viewmodels"
+    wait()
+    local Model1 = Instance.new("Model", game.ReplicatedStorage.Viewmodels)
+    game:GetObjects('rbxassetid://7311376654')[1].Parent = Model1
+    Model1 = game.ReplicatedStorage.Viewmodels.Model
+    for _, Child in pairs(Model1:GetChildren()) do
+        Child.Parent = Model1.Parent
+    end
+    Model1:Destroy()
+    wait()
+    Model2 = game.ReplicatedStorage.Viewmodels.Model
+    for _, Child in pairs(Model2:GetChildren()) do
+        Child.Parent = Model2.Parent
+    end
+    Model2:Destroy()
+end)
+
 unlockinventory = aG:CreateButton("Unlock Inventory", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/6segs/millionware/main/inv", true))()
 end)
@@ -2100,7 +2116,7 @@ ScreenLabel.Size = UDim2.new(0, 260, 0, 20)
 
 Color.Name = "Color"
 Color.Parent = ScreenLabel
-Color.BackgroundColor3 = Color3.fromRGB(200, 90, 120)
+Color.BackgroundColor3 = Color3.fromRGB(83, 49, 127)
 Color.BorderSizePixel = 0
 Color.Position = UDim2.new(0.0192307699, 0, 0, 0)
 Color.Size = UDim2.new(0.642307699, 0, 0, 2)
@@ -2158,9 +2174,7 @@ UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fr
 UIGradient_2.Rotation = 90
 UIGradient_2.Parent = Background
 
--- Scripts:
-
-local function MLTP_fake_script() -- Time.LocalScript 
+local function BVSCNK_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local mo = "A.M."
@@ -2204,46 +2218,46 @@ local function MLTP_fake_script() -- Time.LocalScript
 		script.Parent.Text = "" ..h.. ":" ..m.. ":" ..s.. " "
 	end
 end
-coroutine.wrap(MLTP_fake_script)()
-local function WLWI_fake_script() -- ScreenLabel.Dragify 
+coroutine.wrap(BVSCNK_fake_script)()
+local function NOHUG_fake_script() -- ScreenLabel.drag 
 	local script = Instance.new('LocalScript', ScreenLabel)
 
 	local UIS = game:GetService("UserInputService")
 	function dragify(Frame)
-	    dragToggle = nil
-	    local dragSpeed = 0
-	    dragInput = nil
-	    dragStart = nil
-	    local dragPos = nil
-	    function updateInput(input)
-	        local Delta = input.Position - dragStart
-	        local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-	        game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
-	    end
-	    Frame.InputBegan:Connect(function(input)
-	        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
-	            dragToggle = true
-	            dragStart = input.Position
-	            startPos = Frame.Position
-	            input.Changed:Connect(function()
-	                if input.UserInputState == Enum.UserInputState.End then
-	                    dragToggle = false
-	                end
-	            end)
-	        end
-	    end)
-	    Frame.InputChanged:Connect(function(input)
-	        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-	            dragInput = input
-	        end
-	    end)
-	    game:GetService("UserInputService").InputChanged:Connect(function(input)
-	        if input == dragInput and dragToggle then
-	            updateInput(input)
-	        end
-	    end)
+		dragToggle = nil
+		local dragSpeed = 0.5
+		dragInput = nil
+		dragStart = nil
+		local dragPos = nil
+		function updateInput(input)
+			local Delta = input.Position - dragStart
+			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
+		end
+		Frame.InputBegan:Connect(function(input)
+			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+				dragToggle = true
+				dragStart = input.Position
+				startPos = Frame.Position
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragToggle = false
+					end
+				end)
+			end
+		end)
+		Frame.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragToggle then
+				updateInput(input)
+			end
+		end)
 	end
 	
 	dragify(script.Parent)
 end
-coroutine.wrap(WLWI_fake_script)()
+coroutine.wrap(NOHUG_fake_script)()
